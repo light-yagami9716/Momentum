@@ -6,15 +6,15 @@ Momentum is intentionally offline-first: no accounts, no servers, no tracking. E
 
 | Today | Statistics |
 |:---:|:---:|
-| ![Today screen in light mode](docs/screens/home-light.png) | ![Statistics screen in light mode](docs/screens/stats-light.png) |
+| ![Today screen in light mode](momentum/docs/screens/home-light.png) | ![Statistics screen in light mode](momentum/docs/screens/stats-light.png) |
 
 | New habit | Dark mode |
 |:---:|:---:|
-| ![Habit form in light mode](docs/screens/form-light.png) | ![Today screen in dark mode](docs/screens/home-dark.png) |
+| ![Habit form in light mode](momentum/docs/screens/form-light.png) | ![Today screen in dark mode](momentum/docs/screens/home-dark.png) |
 
 | Onboarding | Settings |
 |:---:|:---:|
-| ![Onboarding screen in dark mode](docs/screens/onboarding.png) | ![Settings screen in dark mode](docs/screens/settings-dark.png) |
+| ![Onboarding screen in dark mode](momentum/docs/screens/onboarding.png) | ![Settings screen in dark mode](momentum/docs/screens/settings-dark.png) |
 
 ## Features
 
@@ -44,30 +44,32 @@ Momentum is intentionally offline-first: no accounts, no servers, no tracking. E
 The codebase separates the UI layer, the state layer, and the data layer:
 
 ```
-lib/
-├── main.dart                  app entry point
-├── preview.dart               demo entry point with seeded sample data
-├── app.dart                   MaterialApp, theme wiring, routing
-├── core/
-│   ├── constants/             spacing, radii, motion durations and curves
-│   ├── theme/                 palettes, typography, light/dark theme builders
-│   └── utils/                 date helpers, id generation
-├── data/
-│   ├── logic/streak_engine    pure streak and completion-rate algorithms
-│   ├── models/                Habit model and curated icon catalog
-│   └── services/              persistence and notification scheduling
-├── state/
-│   ├── habits_provider        CRUD, check-ins, derived statistics
-│   ├── theme_provider         persisted theme mode
-│   └── settings_provider      time format, week start, onboarding flag
-└── ui/
-    ├── onboarding/            first-launch flow
-    ├── home/                  today screen, habit cards, header ring
-    ├── habit_form/            add/edit form with pickers
-    ├── statistics/            dashboard, bar chart, heatmap
-    ├── settings/              preferences, archive, export, reset
-    ├── navigation/            route table
-    └── widgets/               shared custom widgets
+momentum/
+├── pubspec.yaml
+└── lib/
+    ├── main.dart              app entry point
+    ├── preview.dart           demo entry point with seeded sample data
+    ├── app.dart               MaterialApp, theme wiring, routing
+    ├── core/
+    │   ├── constants/         spacing, radii, motion durations and curves
+    │   ├── theme/             palettes, typography, light/dark theme builders
+    │   └── utils/             date helpers, id generation
+    ├── data/
+    │   ├── logic/streak_engine    pure streak and completion-rate algorithms
+    │   ├── models/                Habit model and curated icon catalog
+    │   └── services/              persistence and notification scheduling
+    ├── state/
+    │   ├── habits_provider    CRUD, check-ins, derived statistics
+    │   ├── theme_provider     persisted theme mode
+    │   └── settings_provider  time format, week start, onboarding flag
+    └── ui/
+        ├── onboarding/        first-launch flow
+        ├── home/              today screen, habit cards, header ring
+        ├── habit_form/        add/edit form with pickers
+        ├── statistics/        dashboard, bar chart, heatmap
+        ├── settings/          preferences, archive, export, reset
+        ├── navigation/        route table
+        └── widgets/           shared custom widgets
 ```
 
 The streak engine is a set of pure functions with no framework dependencies, fully covered by unit tests. Notification scheduling sits behind a `NotificationScheduler` interface, with a no-op implementation used on the web and in tests.
@@ -77,6 +79,7 @@ The streak engine is a set of pure functions with no framework dependencies, ful
 Requires the [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.24 or newer).
 
 ```bash
+cd momentum
 flutter pub get
 ```
 
