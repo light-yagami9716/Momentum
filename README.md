@@ -1,120 +1,116 @@
-# Momentum
+<div align="center">
+  <img src="momentum/docs/screens/home-light.png" alt="Momentum — Today screen" width="280" />
+  <img src="momentum/docs/screens/stats-light.png" alt="Momentum — Statistics screen" width="280" />
+  <img src="momentum/docs/screens/home-dark.png" alt="Momentum — Dark mode" width="280" />
+</div>
 
-A clean, motivating habit tracker that turns small daily actions into lasting streaks. Built with Flutter as a semester project, demonstrating multi-screen navigation, forms with validation, Provider state management, SharedPreferences persistence, and a library of custom reusable widgets.
+# 📱 Momentum — Habit Tracker
 
-Momentum is intentionally offline-first: no accounts, no servers, no tracking. Everything you track lives on your device.
+> A clean, motivating habit tracker that turns small daily actions into lasting streaks. Built with **Flutter** as a semester project — **offline-first: no accounts, no servers, no tracking.**
 
-| Today | Statistics |
-|:---:|:---:|
-| ![Today screen in light mode](momentum/docs/screens/home-light.png) | ![Statistics screen in light mode](momentum/docs/screens/stats-light.png) |
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white" alt="Dart" />
+  <img src="https://img.shields.io/badge/Provider-02569B?style=flat-square&logo=flutter&logoColor=white" alt="Provider" />
+  <img src="https://img.shields.io/badge/Offline--first-34D058?style=flat-square" alt="Offline-first" />
+</p>
 
-| New habit | Dark mode |
-|:---:|:---:|
-| ![Habit form in light mode](momentum/docs/screens/form-light.png) | ![Today screen in dark mode](momentum/docs/screens/home-dark.png) |
+## 🔗 Live Demo
 
-| Onboarding | Settings |
-|:---:|:---:|
-| ![Onboarding screen in dark mode](momentum/docs/screens/onboarding.png) | ![Settings screen in dark mode](momentum/docs/screens/settings-dark.png) |
+🚧 **Coming soon** — the app runs on Android, iOS, and web (`flutter run -d chrome`); a hosted web build can be deployed with `flutter build web`.
 
-## Features
+## 📖 Overview
 
-- **Habit management** — create, edit, archive, and delete habits with a name, icon, colour, and target frequency; validated form with duplicate-name detection and a live preview card.
-- **Daily check-in** — a today-focused home screen where one tap marks a habit complete, with a rest-day section for habits not scheduled today.
-- **Streak tracking** — current and longest streaks per habit, computed on scheduled days only. A single missed day is bridged automatically, so one slip never erases a month of progress.
-- **Progress visualisation** — animated completion rings, a 7-day bar chart, and a month heatmap, all drawn with custom `CustomPainter` implementations.
-- **Statistics dashboard** — total check-ins, 30-day completion rate, top streak, best habit, and per-habit 30-day rings.
-- **Reminders** — optional per-habit daily local notifications with a user-chosen time.
-- **Light and dark themes** — a fully designed dark mode, persisted and applied app-wide through a theme controller.
-- **Onboarding and settings** — a three-page first-launch flow, 12/24-hour time format, week-start day, archived-habit restore, JSON data export, and a full data reset.
-- **Offline-first persistence** — habits, check-in history, and preferences survive app restarts via SharedPreferences.
+Momentum helps you build habits through small, daily check-ins and streaks that encourage consistency without punishing a single slip. Everything lives on your device — data survives restarts via **SharedPreferences**, and reminders fire locally.
 
-## Course concept coverage
+## ✨ Features
 
-| Concept | Where it appears |
+- **🗂️ Habit management** — create, edit, archive, and delete habits (name, icon, colour, frequency), with a validated form, duplicate-name detection, and live preview
+- **✅ Daily check-in** — a today-focused home screen with one-tap completion and a rest-day section
+- **🔥 Streak tracking** — current & longest streaks counted on scheduled days only; one missed day is bridged so a single slip doesn't erase progress
+- **📈 Progress visuals** — animated completion rings, a 7-day bar chart, and a month heatmap drawn with custom `CustomPainter` code
+- **📊 Statistics dashboard** — total check-ins, 30-day completion rate, top streak, best habit, and per-habit rings
+- **🔔 Reminders** — optional per-habit local notifications at times you choose
+- **🌗 Light & dark themes**, a 3-page onboarding flow, and flexible settings (12/24-hour format, week start, restore archived habits, JSON export, full reset)
+
+## 📸 Screenshots
+
+| Today | Statistics | New Habit |
+|---|---|---|
+| <img src="momentum/docs/screens/home-light.png" width="250"/> | <img src="momentum/docs/screens/stats-light.png" width="250"/> | <img src="momentum/docs/screens/form-light.png" width="250"/> |
+
+| Dark Mode | Onboarding | Settings |
+|---|---|---|
+| <img src="momentum/docs/screens/home-dark.png" width="250"/> | <img src="momentum/docs/screens/onboarding.png" width="250"/> | <img src="momentum/docs/screens/settings-dark.png" width="250"/> |
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
 |---|---|
-| Multi-screen navigation | Named routes with a fade transition builder and a bottom navigation bar across Today, Statistics, and Settings |
-| Forms and validation | Add/Edit habit validates name length, duplicate names, and frequency selection before saving |
-| Provider state management | `HabitProvider` for habits and check-ins, `ThemeProvider` for the theme mode, `SettingsProvider` for preferences |
-| SharedPreferences | Habits, completion history, theme choice, and onboarding state persist across restarts |
-| Custom reusable widgets | `StreakRing`, `WeekBarChart`, `MonthHeatmap`, `HabitCard`, `SectionHeader`, `CheckRingButton`, `HabitIconChip` |
-| Lists and scroll views | `ListView` for the habit list, `CustomScrollView` with slivers for the statistics dashboard, `GridView` for the heatmap |
+| **Flutter** (SDK 3.24+) | Cross-platform UI framework |
+| **Provider** | State management (Habit / Theme / Settings providers) |
+| **SharedPreferences** | Local persistence |
+| **flutter_local_notifications** | Per-habit reminders |
+| **CustomPainter** | Streak rings, bar chart, month heatmap |
 
-## Architecture
+## 📦 Dependencies
 
-The codebase separates the UI layer, the state layer, and the data layer:
+| Package | Version |
+|---|---|
+| `provider` | ^6.1.5+1 |
+| `shared_preferences` | ^2.5.5 |
+| `flutter_local_notifications` | ^22.3.0 |
+| `timezone` | ^0.11.1 |
+| `intl` | ^0.20.3 |
+| `cupertino_icons` | ^1.0.8 |
 
-```
-momentum/
-├── pubspec.yaml
-└── lib/
-    ├── main.dart              app entry point
-    ├── preview.dart           demo entry point with seeded sample data
-    ├── app.dart               MaterialApp, theme wiring, routing
-    ├── core/
-    │   ├── constants/         spacing, radii, motion durations and curves
-    │   ├── theme/             palettes, typography, light/dark theme builders
-    │   └── utils/             date helpers, id generation
-    ├── data/
-    │   ├── logic/streak_engine    pure streak and completion-rate algorithms
-    │   ├── models/                Habit model and curated icon catalog
-    │   └── services/              persistence and notification scheduling
-    ├── state/
-    │   ├── habits_provider    CRUD, check-ins, derived statistics
-    │   ├── theme_provider     persisted theme mode
-    │   └── settings_provider  time format, week start, onboarding flag
-    └── ui/
-        ├── onboarding/        first-launch flow
-        ├── home/              today screen, habit cards, header ring
-        ├── habit_form/        add/edit form with pickers
-        ├── statistics/        dashboard, bar chart, heatmap
-        ├── settings/          preferences, archive, export, reset
-        ├── navigation/        route table
-        └── widgets/           shared custom widgets
-```
+**Dev dependencies:** `flutter_lints` ^6.0.0 · `flutter_test` (SDK)
 
-The streak engine is a set of pure functions with no framework dependencies, fully covered by unit tests. Notification scheduling sits behind a `NotificationScheduler` interface, with a no-op implementation used on the web and in tests.
+Fonts: **Sora** & **Inter** (bundled as assets).
 
-## Getting started
+## 🚀 Run Locally
 
-Requires the [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.24 or newer).
+**Prerequisites:** Flutter SDK **3.24+** (Dart ^3.13.1) — [install guide](https://docs.flutter.dev/get-started/install)
 
 ```bash
-cd momentum
+# 1. Clone the repository
+git clone https://github.com/rafidhasansydney/Momentum.git
+cd Momentum/momentum
+
+# 2. Install dependencies
 flutter pub get
+
+# 3. Run the app
+flutter run                 # on a device / emulator
+flutter run -d chrome       # on the web
+flutter run -t lib/preview.dart -d chrome   # seeded demo mode
 ```
 
-Run on a connected Android device or emulator:
+**Testing & building:**
 
 ```bash
-flutter run
+flutter test                        # unit tests (incl. the streak engine)
+flutter build apk --release        # Android APK → build/app/outputs/flutter-apk/
+flutter build web                  # web build → build/web/
 ```
 
-Run in Chrome for quick iteration:
+## 🏗️ Architecture
 
-```bash
-flutter run -d chrome
+Three layers under `lib/`:
+
+```
+lib/
+├── main.dart / preview.dart / app.dart
+├── core/        # constants, theme, utils
+├── data/        # streak engine, models, services
+├── state/       # Habit / Theme / Settings providers
+└── ui/          # onboarding, home, habit form, statistics,
+                 # settings, navigation, custom widgets
 ```
 
-A demo entrypoint seeds five sample habits with weeks of check-in history, useful for exploring the statistics screens without waiting:
+- The **streak engine** is written as pure functions and covered by unit tests
+- Notifications sit behind an interface, with a no-op implementation for web/test
 
-```bash
-flutter run -t lib/preview.dart -d chrome
-```
+## 🎓 Course Concepts Covered
 
-Local notifications are only supported on Android and iOS; on the web, reminders are skipped and everything else works as usual.
-
-## Testing
-
-```bash
-flutter test
-```
-
-The suite covers the streak algorithm (bridged grace days, scheduled-day handling, longest-run detection), persistence round-trips, notification scheduling wiring, and end-to-end widget flows from onboarding through creating and checking in a habit.
-
-## Building
-
-```bash
-flutter build apk --release
-```
-
-The release APK is written to `build/app/outputs/flutter-apk/app-release.apk`. Use `--split-per-abi` for smaller per-architecture builds.
+Multi-screen navigation (named routes, fade transitions, bottom nav) · forms & validation · Provider state management · SharedPreferences persistence · custom widgets (`StreakRing`, `WeekBarChart`, `MonthHeatmap`, `HabitCard`, …) · lists & scroll views
